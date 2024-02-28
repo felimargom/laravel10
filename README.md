@@ -1,3 +1,13 @@
+# DDEV powered Laravel 10 With Composer Installation
+
+This is a sample Laravel 10 with Composer installation pre-configured for use with DDEV.
+
+Features:
+
+- Laravel 10 Composer Project
+- Using the [DDEV](https://ddev.readthedocs.io/en/latest/)
+- PHP 8.3 and MySQL 8.0 settings
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -21,6 +31,99 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Start here
+
+### Step #1: DDEV environment setup
+
+#### Install Docker for Mac
+
+> [Read more about the Hyperkit the VM for Docker for Mac](https://docs.docker.com/docker-for-mac/docker-toolbox/)
+
+1. [Install Docker for Mac](https://docksal.io/installation/#macos-docker-for-mac)
+
+2. After installation is complete verify you have installed Docker for Mac by
+opening your terminal and typing `docker --version`.
+
+**This is a one time setup - skip this if you already have a working DDEV environment.**
+
+#### Follow [DDEV Installation](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
+
+  ```bash
+  brew install ddev/ddev/ddev
+  mkcert -install
+  ```
+
+### Step #2: Project setup
+
+1. Clone this repo into your Projects directory
+
+    ```bash
+    git clone git@github.com:felimargom/laravel10.git laravel10
+    cd laravel10
+    ```
+
+2. Initialize the site
+
+    This will initialize local settings and install the site via DDEV
+
+    ```bash
+    ddev start
+    ```
+
+    - Inside the docker container create the .env file, run this command:
+  `cp .env.example .env`
+
+    - Modify this new .env created file, using this values:  
+
+    ```bash
+    DB_CONNECTION="mysql"
+    DB_HOST="db"
+    DB_PORT="3306"
+    DB_DATABASE="db"
+    DB_USERNAME="db"
+    DB_PASSWORD="db"
+    ```
+
+3. Import database
+
+    ```bash
+    ddev import-db --file=db/db_init.sql
+    ```
+
+4. Run composer
+
+    ```bash
+    ddev composer install
+
+5. Run npm
+
+    - Exec: `ddev npm install`
+
+      - A `package-lock.json` file will be generated. This file should be
+    committed to your repository.
+
+    - Exec: `ddev npm run dev`
+
+6. Run php artisan
+
+    - Type: `ddev php artisan key:generate`
+
+    - Run: `ddev php artisan migrate`
+
+    - Run `ddev php artisan storage:link`
+
+    - Load `ddev launch` in a browser to view the homepage.
+
+### Notes
+
+if you get some kind of error related to config missing try using
+
+```bash
+ddev php artisan config:clear
+```
+
+this command reload the configuration.## Start here
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
@@ -28,38 +131,6 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
